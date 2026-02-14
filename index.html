@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>❤️ مفاجأة لدعاء قرة عيني❤️</title>
+  <style>
+    body{
+      margin:0;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at top, #ff4d6d, #12000b);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:white;
+      overflow:hidden;
+      direction: rtl;
+    }
+    .card{
+      width:92%;
+      max-width:560px;
+      background: rgba(255,255,255,0.10);
+      border:1px solid rgba(255,255,255,0.15);
+      padding:22px;
+      border-radius:24px;
+      box-shadow:0 20px 60px rgba(0,0,0,0.35);
+      backdrop-filter: blur(10px);
+      text-align:center;
+      position:relative;
+      z-index:2;
+    }
+    h1{margin:5px 0 10px;font-size:28px;}
+    p{margin:8px 0;font-size:16px;line-height:1.85;opacity:0.95;}
+    .btn{border:none;padding:12px 18px;border-radius:14px;font-size:16px;cursor:pointer;margin-top:12px;background:white;color:#ff2d55;font-weight:bold;transition:0.2s;}
+    .btn:active{transform: scale(0.98);}
+    .btn:hover{opacity:0.95;}
+    .btn2{border:none;padding:12px 18px;border-radius:14px;font-size:16px;cursor:pointer;margin-top:12px;background: rgba(255,255,255,0.12);color:white;font-weight:bold;border:1px solid rgba(255,255,255,0.18);}
+    .hidden{display:none;}
+    .loveBox{
+      margin-top:15px;
+      padding:16px;
+      border-radius:18px;
+      background: rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.15);
+      text-align:right;
+      max-height:250px;
+      overflow-y:auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .big{font-size:18px;font-weight:bold;}
+    .countdown{font-size:14px;opacity:0.9;margin-top:10px;}
+    .heart{
+      position:fixed;
+      bottom:-30px;
+      font-size:18px;
+      opacity:0.8;
+      animation: floatUp linear forwards;
+      z-index:1;
+      pointer-events:none;
+    }
+    @keyframes floatUp{
+      from{transform:translateY(0) scale(1);opacity:0.85;}
+      to{transform:translateY(-110vh) scale(1.6);opacity:0;}
+    }
+    .star{
+      position:fixed;
+      top:-20px;
+      font-size:10px;
+      opacity:0.35;
+      animation: fall linear forwards;
+      z-index:1;
+      pointer-events:none;
+    }
+    @keyframes fall{from{transform:translateY(0);opacity:0.35;}to{transform:translateY(110vh);opacity:0;}}
+    .final{margin-top:14px;padding:14px;border-radius:18px;background: rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);}
+    .tiny{font-size:13px;opacity:0.85;margin-top:10px;}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>❤️ دعاء بنتي الغالية… يا أغلى حاجة في حياتي ❤️</h1>
+    <p>هذا اللينك معمول ليك انتي بالذات اكهو… وما فماش حد في الدنيا يستحقو كان إنتِ 😍</p>
+    <button class="btn" onclick="openSurprise()">إفتحي المفاجأة 💌</button>
+    
+    <div id="surprise" class="hidden">
+      <div class="line"></div>
+      <p class="big">🌹 Happy Valentine يا دعاء 🌹</p>
+      <p>
+        دعاء… صار البارح… وأنا نحبك تعرف اني مستحيل نسلم… حتى كي تجرحني نبقى ديما وليدك لي يحبك وعمرو ما يسلم فيك ❤️💕
+      </p>
+      
+      <div class="loveBox">
+        <p>من نهار <b>28/08/2025</b> وأنا نحسب الأيام… وقلبي يختارك كل نهار ❤️</p>
+        <p>إنتِ <b>راحة قلبي</b> و<b>روحي</b> والسبب اللي يخلي حياتي مليانة حب 💕</p>
+      </div>
+      
+      <p class="countdown" id="timer"></p>
+      
+      <button class="btn" onclick="askQuestion()">سؤال صغير… 😳❤️</button>
+      <div id="question" class="hidden">
+        <div class="line"></div>
+        <p class="big">دعاء… تقبلي تكوني My Valentine؟ 💍😍</p>
+        <button class="btn" onclick="yes()">نعم 😍</button>
+        <button class="btn" onclick="no()">لا 😭</button>
+        <p id="answer"></p>
+      </div>
+
+      <button class="btn2" onclick="playAudio('open.mp3')">شغّل الصوت 1 🎶</button>
+      <button class="btn2" onclick="playAudio('yes.mp3')">شغّل الصوت نعم 🎶</button>
+      <button class="btn2" onclick="playAudio('no.mp3')">شغّل الصوت لا 🎶</button>
+    </div>
+  </div>
+
+  <script>
+    function openSurprise(){
+      document.getElementById("surprise").classList.remove("hidden");
+      startHearts();
+      startStars();
+      startTimer();
+    }
+
+    function startHearts(){
+      setInterval(()=>{
+        if(document.getElementsByClassName("heart").length>20) return;
+        const heart=document.createElement("div");
+        heart.className="heart";
+        heart.innerText="❤️";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.animationDuration=(3+Math.random()*3)+"s";
+        heart.style.fontSize=(14+Math.random()*18)+"px";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),6000);
+      },400);
+    }
+
+    function startStars(){
+      setInterval(()=>{
+        if(document.getElementsByClassName("star").length>15) return;
+        const star=document.createElement("div");
+        star.className="star";
+        star.innerText="✨";
+        star.style.left=Math.random()*100+"vw";
+        star.style.animationDuration=(4+Math.random()*4)+"s";
+        star.style.fontSize=(10+Math.random()*10)+"px";
+        document.body.appendChild(star);
+        setTimeout(()=>star.remove(),8000);
+      },700);
+    }
+
+    function startTimer(){
+      const startDate=new Date("2025-08-28T00:00:00");
+      setInterval(()=>{
+        const now=new Date();
+        const diff=now-startDate;
+        const days=Math.floor(diff/(1000*60*60*24));
+        const hours=Math.floor((diff/(1000*60*60))%24);
+        const minutes=Math.floor((diff/(1000*60))%60);
+        document.getElementById("timer").innerHTML="⏳ من نهار 28/08/2025: "+days+" يوم و "+hours+" ساعة و "+minutes+" دقيقة ❤️";
+      },1000);
+    }
+
+    function askQuestion(){document.getElementById("question").classList.remove("hidden");}
+    function yes(){document.getElementById("answer").innerHTML="😍❤️ ياااااا روحييي دعاء! تو وليتي رسميًا My Valentine 🌹";}
+    function no(){document.getElementById("answer").innerHTML="😭 لااا؟! تو نعاود نسألك غدوة… خاطر حبّي ما يستسلمش ❤️😂";}
+    
+    function playAudio(file){
+      const audio=new Audio(`https://raw.githubusercontent.com/bader639/Valentin-Love/main/${file}`);
+      audio.play();
+    }
+  </script>
+</body>
+  </html>
